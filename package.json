@@ -1,0 +1,27 @@
+{
+  "name": "project_manager",
+  "version": "1.0.0",
+  "description": "A project manager for Hoosierboy Restorations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/slyley07/project_manager.git"
+  },
+  "keywords": [
+    "internal",
+    "management",
+    "project",
+    "management",
+    "restorations",
+    "Hoosierboy"
+  ],
+  "author": "Bradley Showalter",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/slyley07/project_manager/issues"
+  },
+  "homepage": "https://github.com/slyley07/project_manager#readme"
+}
