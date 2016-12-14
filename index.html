@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>
+      Project Manager
+    </title>
+
+
+  </head>
+  <body>
+    <form action="/projects" method="POST">
+      <div>
+        <p id="tracking">
+
+        </p>
+      </div>
+
+      <input type="text" name="customer_info" placeholder="Customer Info">
+
+      <input type="text" name="job_name" placeholder="Job Name">
+
+      <input type="date" name="date" placeholder="date">
+
+      <div class="">
+        <p>
+          Date until due:
+        </p>
+
+        <p id="date_until">
+
+        </p>
+      </div>
+
+      <select class="" name="delivery">
+        <option value="USPS">USPS</option>
+        <option value="UPS">UPS</option>
+        <option value="FEDEX">FEDEX</option>
+      </select>
+
+      <button type="submit">Submit</button>
+    </form>
+
+  </body>
+</html>

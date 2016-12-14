@@ -1,0 +1,12 @@
+<nav>
+  <% if (user.role === 'Admin') { %>
+    <a href="/users">All Users</a>
+  <%
+    }
+    if (projects_page === false) { %>
+      <a href="/projects">Projects</a>
+  <% } %>
+
+  <a href="/user/<%= user.username %>">Profile</a>
+  <a href="/logout">Log Out</a>
+</nav>

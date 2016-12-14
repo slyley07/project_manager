@@ -4,7 +4,9 @@
   "description": "A project manager for Hoosierboy Restorations",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon server.js",
+    "scss": "sass --watch ./public/style.scss:./public/style.css"
   },
   "repository": {
     "type": "git",
@@ -23,5 +25,26 @@
   "bugs": {
     "url": "https://github.com/slyley07/project_manager/issues"
   },
-  "homepage": "https://github.com/slyley07/project_manager#readme"
+  "homepage": "https://github.com/slyley07/project_manager#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "latest",
+    "body-parser": "^1.15.2",
+    "connect-flash": "~0.1.1",
+    "cookie-parser": "~1.0.0",
+    "ejs": "^2.5.2",
+    "express": "^4.14.0",
+    "express-jwt": "^5.1.0",
+    "express-session": "~1.0.0",
+    "jsonwebtoken": "^7.1.9",
+    "method-override": "~1.0.0",
+    "mongodb": "^2.2.11",
+    "mongoose": "^4.7.0",
+    "morgan": "~1.0.0",
+    "passport": "~0.1.17",
+    "passport-jwt": "^2.2.1",
+    "passport-local": "~0.1.6"
+  },
+  "devDependencies": {
+    "nodemon": "^1.11.0"
+  }
 }

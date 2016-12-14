@@ -1,0 +1,100 @@
+body {
+  width: 1024px;
+  margin: 0 auto;
+
+  table {
+    thead {
+      tr {
+        th {
+          text-align: center;
+          border: 1px solid black;
+          .progress_table {
+            width: 100%;
+            thead {
+              width: 100%;
+              tr {
+                display: flex;
+                flex-wrap: nowrap;
+                justify-content: space-around;
+                th {
+                  border: none;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        td {
+          border: 1px solid black;
+          text-align: center;
+          position: relative;
+
+          table {
+            tr {
+              td {
+                border: none;
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+
+  form {
+    .inputs {
+      display: flex;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+
+      div {
+        label {
+          display: block;
+        }
+      }
+    }
+
+    button[type="submit"] {
+      display: block;
+    }
+
+    .input_things {
+      border: none;
+      border-bottom: 1px solid black;
+      margin: 10px 5px;
+
+      &[type="number"] {
+        width: 90px;
+      }
+
+      &[type="date"] {
+        width: 120px;
+      }
+    }
+
+    textarea {
+      overflow-x: auto;
+      overflow-y: scroll;
+      height: 100%;
+    }
+  }
+
+  .edit_form {
+    table {
+      width: 100%;
+
+      tr {
+        td {
+          table {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

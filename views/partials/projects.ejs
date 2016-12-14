@@ -1,0 +1,102 @@
+<% for (var i = 0; i < projects.length; i++){%>
+  <tr>
+    <td>
+      <%= projects[i].tracking %>
+    </td>
+
+    <td title="Address:
+<%= projects[i].customer_info.address_1 %>,
+<% if (projects[i].customer_info.address_2 !== undefined) { %><%= projects[i].customer_info.address_2 %>,<% } %>
+<%= projects[i].customer_info.address_city %>, <%= projects[i].customer_info.address_state %> <%= projects[i].customer_info.address_zip %>">
+      <%= projects[i].customer_info.name %>
+    </td>
+
+    <td>
+      <%= projects[i].job_name %>
+    </td>
+
+    <td>
+      <pre>
+      <%= projects[i].instructions %>
+    </pre>
+    </td>
+
+    <td>
+      <table>
+        <tbody>
+          <% if (projects[i].details.length > 0) {
+            for (var g = 0; g < projects[i].details.length; g++) { %>
+              <% if (projects[i].details[g].progress.length !== 0) { %>
+                <tr>
+                  <td>
+                      <%= projects[i].details[g].progress %>
+                  </td>
+
+                  <td>
+                      <%= projects[i].details[g].worker %>
+                  </td>
+
+                  <td>
+                      <%= projects[i].details[g].hours %>
+                  </td>
+                </tr>
+              <% } else { %>
+                <tr>
+                  <td>
+                    No progress
+                  </td>
+
+                  <td>
+                    No progress
+                  </td>
+
+                  <td>
+                    No progress
+                  </td>
+                </tr>
+              <% break;} %>
+            <% } %>
+          <% } else { %>
+            <tr>
+              <td>
+                No progress
+              </td>
+
+              <td>
+                No progress
+              </td>
+
+              <td>
+                No progress
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+    </td>
+
+    <td>
+      <%= functions.getProjectDueDate(projects[i], false) %>
+    </td>
+
+    <td>
+      <%= functions.getDaysUntil() %> days left
+    </td>
+
+    <td>
+      <%= projects[i].delivery %>
+    </td>
+
+    <td>
+      <a href="/projects/edit/<%=projects[i].tracking%>" name="update">Update</a>
+    </td>
+    <% if (user.role === 'Admin') { %>
+    <td>
+      <form action="/projects/delete/<%= projects[i].tracking %>" method="POST">
+        <input type="hidden" name="_method" value="DELETE"/>
+        <button type="submit">X</button>
+      </form>
+    </td>
+  <% } %>
+  </tr>
+<% } %>

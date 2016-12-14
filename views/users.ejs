@@ -1,0 +1,41 @@
+<% include ./partials/head.ejs %>
+  <% if (user) { %>
+    <% include ./partials/nav.ejs %>
+  <% } %>
+
+<div class="container">
+  <div class="col-sm-6 col-sm-offset-3">
+      <h1>
+        Add a new user
+      </h1>
+
+      <% if (users.length > 0) { %>
+        <% for (var r = 0; r < users.length; r++) { %>
+          <h3><%= users[r].username %></h3>
+        <% } %>
+      <% } else { %>
+        <h2>No users</h2>
+      <% } %>
+
+      <% if (user.role === 'Admin') { %>
+        <!-- SIGN UP FORM -->
+        <form action="/users" method="POST">
+          <label>Name</label>
+          <input type="text" name="name">
+
+          <label>Username</label>
+          <input type="text" class="form-control" name="username">
+
+          <label>Password</label>
+          <input type="password" class="form-control" name="password">
+
+          <!-- <input type="text" name="isAdmin" value="false" hidden="hidden"> -->
+
+          <button type="submit" class="btn btn-warning btn-lg">Signup</button>
+        </form>
+      <% } %>
+
+  </div>
+
+</div>
+<% include ./partials/footer.ejs %>

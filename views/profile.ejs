@@ -1,0 +1,30 @@
+<% include ./partials/head.ejs %>
+  <h1>
+    This is <%= user.username %>&rsquo;s profile
+  </h1>
+
+  <form class='update_user' action="/user/<%= user.username %>" method="post">
+    <!-- <input type="hidden" name="_method" value="PUT"/> -->
+
+    <input type="text" name="username" placeholder="Change your username">
+
+    <label>
+      Change your password
+    </label>
+
+    <input id="pass" type="password" name="password" placeholder="New password">
+
+    <input id="conf" type="password" name="password_conf" placeholder="Confirm password">
+
+    <input type="submit" value="Submit">
+  </form>
+
+  <script type="text/javascript">
+    $('.update_user').submit(function(){
+      var pass = document.getElementById('pass').value;
+      var conf = document.getElementById('conf').value
+      return functions.confirmPasswords(pass, conf);
+    })
+  </script>
+
+<% include ./partials/footer.ejs %>

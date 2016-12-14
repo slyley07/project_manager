@@ -1,0 +1,215 @@
+<% include ./partials/head.ejs %>
+  <% if (user) { %>
+    <% include ./partials/nav.ejs %>
+  <% } %>
+  <div class="projects_buttons">
+    <button class='current' type="button" name="current">
+      Current
+    </button>
+
+    <button class="archived" type="button" name="archived">
+      Archived
+    </button>
+
+    <button type="button" class="all" name="all">
+      All
+    </button>
+  </div>
+
+  <div>
+    <form class="search" action="#" method="GET">
+      <input id="search_term" type="text" name="search" value="">
+      <button type="submit" name="search">Search</button>
+    </form>
+  </div>
+
+  <% if (projects.length > 0) {%>
+  <table>
+    <thead>
+      <tr>
+        <th>
+          Tracking
+        </th>
+
+        <th>
+          Customer Info
+        </th>
+
+        <th>
+          Job Name
+        </th>
+
+        <th>
+          Instructions
+        </th>
+
+        <th>
+          Details
+
+          <table class="progress_table">
+            <thead>
+              <tr>
+                <th>
+                  Progress
+                </th>
+
+                <th>
+                  Worker
+                </th>
+
+                <th>
+                  Worker Hrs
+                </th>
+
+              </tr>
+            </thead>
+          </table>
+        </th>
+
+        <th>
+          Due Date
+        </th>
+
+        <th>
+          Days until Due
+        </th>
+
+        <th>
+          Delivery method
+        </th>
+
+        <th>
+          Update
+        </th>
+
+        <% if (user.role === 'Admin') { %>
+        <th>
+          Delete?
+        </th>
+        <% } %>
+      </tr>
+    </thead>
+
+    <tbody class="projects_partial">
+      <% include ./partials/projects.ejs %>
+    </tbody>
+
+  </table>
+  <% } %>
+
+  <% if (user.role === 'Admin') { %>
+    <form action="/projects" method="POST">
+      <div class="inputs">
+        <div class="customer_info">
+          <label for="customer_info">
+            Customer Name
+          </label>
+
+          <input class="input_things" type="text" name="customer_name" required>
+
+          <label>
+            Customer Address
+          </label>
+
+          <input class="input_things" type="text" name="customer_address_1" placeholder="Address 1" required><br />
+
+          <input class="input_things" type="text" name="customer_address_2" placeholder="Address 2"><br />
+
+          <input class="input_things" type="text" name="customer_address_city" placeholder="City" required><br />
+
+          <input class="input_things" type="text" name="customer_address_state" placeholder="State" required><br />
+
+          <input class="input_things" type="text" name="customer_address_zip" placeholder="Zip Code" required>
+        </div>
+
+        <div class="job_name">
+          <label for="job_name">
+            Job Name
+          </label>
+
+          <input class="input_things" type="text" name="job_name" placeholder="Job Name" required>
+        </div>
+
+        <div class="instructions">
+          <label for="instructions">Instructions</label>
+
+          <textarea name="instructions" required></textarea>
+        </div>
+
+        <div class="date">
+          <label for="due_date">
+            Due Date
+          </label>
+
+          <input class="input_things" type="date" name="due_date" placeholder="due date" required>
+        </div>
+
+        <div class="delivery">
+          <label for="delivery">
+            Delivery Method
+          </label>
+
+          <select class="" name="delivery" required>
+            <option selected="selected" disabled="true">--Method of Delivery--</option>
+            <option value="Pickup">Pickup</option>
+            <option value="Ship">Ship</option>
+            <optgroup label="Mail">
+              <option value="USPS">USPS</option>
+              <option value="UPS">UPS</option>
+              <option value="FEDEX">FEDEX</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+
+      <button type="submit">Submit</button>
+    </form>
+  <% } %>
+
+<script type="text/javascript">
+  function sendAjaxRequest(archived) {
+    $.ajax({
+      url: '/filter',
+      method: 'GET',
+      data: {"archived": archived}
+    })
+    .done(function(projects) {
+      $('.projects_partial').html(projects)
+    })
+  }
+
+  $('.current').click(function(){
+    sendAjaxRequest(false)
+  })
+
+  $('.archived').click(function(){
+    sendAjaxRequest(true)
+  })
+
+  $('.all').click(function(){
+    $.ajax({
+      url: '/all',
+      method: 'GET',
+    })
+    .done(function(projects) {
+      $('.projects_partial').html(projects)
+    })
+  })
+
+  $('.search').on("submit", function(e){
+    e.preventDefault();
+    var term = document.getElementById('search_term').value;
+    $.ajax({
+      url: '/search',
+      data: {"search": term}
+    })
+    .done(function(projects) {
+      $('.projects_partial').html(projects)
+    })
+  })
+
+
+</script>
+
+
+<% include ./partials/footer.ejs %>

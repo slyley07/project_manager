@@ -1,0 +1,259 @@
+<% include ./partials/head.ejs %>
+  <% if (user) { %>
+    <% include ./partials/nav.ejs %>
+  <% } %>
+
+  <h1>
+    Edit Project <%= project.tracking %>
+  </h1>
+
+  <form class="edit_form" action="/projects/edit/<%= project.tracking %>" method="post">
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Costumer Info
+          </th>
+
+          <th>
+            Job Name
+          </th>
+
+          <th>
+            Instructions
+          </th>
+
+          <th>
+            Details
+
+            <table class="progress_table">
+              <thead>
+                <tr>
+                  <th>
+                    Progress
+                  </th>
+
+                  <th>
+                    Worker
+                  </th>
+
+                  <th>
+                    Worker Hrs
+                  </th>
+
+                </tr>
+              </thead>
+            </table>
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>
+            <div class="customer_info">
+              <label for="customer_info">
+                Customer Name
+              </label>
+
+              <br />
+
+              <input class="input_things" type="text" name="customer_name" value="<%= project.customer_info.name %>" required>
+
+              <br />
+
+              <label>
+                Customer Address
+              </label>
+
+              <br />
+
+              <input class="input_things" type="text" name="customer_address_1" value="<%= project.customer_info.address_1 %>" required><br />
+
+              <input class="input_things" type="text" name="customer_address_2" value="<%= project.customer_info.address_2 %>"><br />
+
+              <input class="input_things" type="text" name="customer_address_city" value="<%= project.customer_info.address_city %>" required><br />
+
+              <input class="input_things" type="text" name="customer_address_state" value="<%= project.customer_info.address_state %>" required><br />
+
+              <input class="input_things" type="text" name="customer_address_zip" value="<%= project.customer_info.address_zip %>" required>
+            </div>
+          </td>
+
+          <td>
+            <input class="input_things" type="text" name="job_name" value="<%= project.job_name %>" required>
+          </td>
+
+          <td>
+            <textarea name="instructions" required><%= project.instructions %></textarea>
+          </td>
+
+          <td>
+            <table>
+              <tbody>
+                <tr>
+                  <td>
+                    <input class="input_things" type="text" name="progress" placeholder="Progress on project">
+                  </td>
+
+                  <td>
+                    <select class="" name="worker">
+                      <option selected="selected" disabled="true">-Worker-</option>
+                      <% for (var l = 0; l < users.length; l++) { %>
+                        <option value="<%= users[l].name %>"><%= users[l].name %></option>
+                      <% } %>
+                    </select>
+                  </td>
+
+                  <td>
+                    <input class="input_things date" type="number" name="hours" placeholder="hours worked">
+                  </td>
+                </tr>
+
+                <tr>
+                  <table>
+                    <tbody>
+                      <% if (project.details.length > 0) {
+                        for (var g = 0; g < project.details.length; g++) { %>
+                          <%= project.details[g].length %>
+
+                          <% if (project.details[g].progress.length !== 0) { %>
+                            <tr>
+                              <td>
+                                  <%= project.details[g].progress %>
+                              </td>
+
+                              <td>
+                                  <%= project.details[g].worker %>
+                              </td>
+
+                              <td>
+                                  <%= project.details[g].hours %>
+                              </td>
+                            </tr>
+                          <% }  %>
+                            <!-- <tr>
+                              <td>
+                                No progress
+                              </td>
+
+                              <td>
+                                No progress
+                              </td>
+
+                              <td>
+                                No progress
+                              </td>
+                            </tr> -->
+                          <% %>
+                        <% } %>
+                      <% } else { %>
+                        <tr>
+                          <td>
+                            No progress
+                          </td>
+
+                          <td>
+                            No progress
+                          </td>
+
+                          <td>
+                            No progress
+                          </td>
+                        </tr>
+                      <% } %>
+                    </tbody>
+                  </table>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>
+            Due Date
+          </th>
+
+          <th>
+            Days until Due
+          </th>
+
+          <th>
+            Delivery method
+          </th>
+
+          <th>
+            Archive
+          </th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <tr>
+          <td>
+            <input class="input_things" type="date" name="due_date" value="<%= functions.getProjectDueDate(project, true) %>" required>
+          </td>
+
+          <td>
+            <%= functions.getDaysUntil() %> days left
+          </td>
+
+          <td>
+            <select id="edit_select" onload="selectSelected(<%= project.delivery %>)" name="delivery" required>
+              <option value="Pickup">Pickup</option>
+              <option value="Ship">Ship</option>
+              <optgroup label="Mail">
+                <option value="USPS">USPS</option>
+                <option value="UPS">UPS</option>
+                <option value="FEDEX">FEDEX</option>
+              </optgroup>
+            </select>
+          </td>
+
+          <td>
+            <input type="radio" name="archive">
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h3>
+      Notes
+    </h3>
+
+      <% if (project.notes.length > 0) {
+          for (var n = 0; n < project.notes.length; n++) { %>
+            <p>
+              <%= project.notes[n] %>
+            </p>
+
+      <% }
+       } %>
+
+    <textarea name="notes"></textarea>
+
+    <button id="update" type="submit">Update</button>
+
+  </form>
+
+  <form action="/projects/delete/<%= project.tracking %>" method="POST">
+    <input type="hidden" name="_method" value="DELETE"/>
+    <button type="submit">X</button>
+  </form>
+
+  <script type="text/javascript">
+  var select = document.getElementById('edit_select');
+  var opts = select.options;
+  for (var y = 0; y < opts.length; y++) {
+    if (opts[y].value == "<%=project.delivery %>") {
+      select.selectedIndex = y;
+    };
+  }
+  </script>
+
+<% include ./partials/footer.ejs %>

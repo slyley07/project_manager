@@ -1,0 +1,48 @@
+body {
+  width: 1024px;
+  margin: 0 auto; }
+  body table thead tr th {
+    text-align: center;
+    border: 1px solid black; }
+    body table thead tr th .progress_table {
+      width: 100%; }
+      body table thead tr th .progress_table thead {
+        width: 100%; }
+        body table thead tr th .progress_table thead tr {
+          display: flex;
+          flex-wrap: nowrap;
+          justify-content: space-around; }
+          body table thead tr th .progress_table thead tr th {
+            border: none; }
+  body table tbody tr td {
+    border: 1px solid black;
+    text-align: center;
+    position: relative; }
+    body table tbody tr td table tr td {
+      border: none; }
+  body form .inputs {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-between; }
+    body form .inputs div label {
+      display: block; }
+  body form button[type="submit"] {
+    display: block; }
+  body form .input_things {
+    border: none;
+    border-bottom: 1px solid black;
+    margin: 10px 5px; }
+    body form .input_things[type="number"] {
+      width: 90px; }
+    body form .input_things[type="date"] {
+      width: 120px; }
+  body form textarea {
+    overflow-x: auto;
+    overflow-y: scroll;
+    height: 100%; }
+  body .edit_form table {
+    width: 100%; }
+    body .edit_form table tr td table {
+      width: 100%; }
+
+/*# sourceMappingURL=style.css.map */
